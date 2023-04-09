@@ -1,28 +1,19 @@
 import joblib
-import os
+import numpy as np
 import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics import confusion_matrix, f1_score, accuracy_score
 
 # %%
-data = pd.read_csv('./profanity_check/data/clean_data.csv')
+data = pd.read_csv('./test_data.csv')
 texts = data['text'].astype(str)
 y = data['is_offensive']
 
 # %%
 
-if os.path.exists('vectorizer.joblib'):
-    vectorizer = joblib.load('vectorizer.joblib')
-else:
-    vectorizer = CountVectorizer(stop_words='english', min_df=0.0001)
-    X = vectorizer.fit_transform(texts)
-    joblib.dump(vectorizer, 'vectorizer.joblib')
+vectorizer = joblib.load('vectorizer.joblib')
 model = joblib.load('model.joblib')
 
 # %%
-# idx = 2
-# print("Bad" if y[idx] == 1 else "Good")
-# print("----")
-# print(texts[idx])
 eval_texts = ['Hello there, how are you',
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
               '!!!! Click this now!!! -> https://example.com',
@@ -33,11 +24,26 @@ tokens = vectorizer.encode(eval_texts)
 model.predict(tokens)
 
 # %%
-df = pd.read_csv("test_set.csv", sep=",")
-test_texts = df["Canonical Form 1"].astype(str)
+df = pd.read_csv("user_inputs.csv", sep=",")
+test_texts = df["translated"].astype(str)
 tokens = vectorizer.encode(test_texts)
 preds = model.predict(tokens)
-false_neg = df["Canonical Form 1"][preds == 0]
-true_pos = df["Canonical Form 1"][preds == 1]
-print(len(false_neg)/len(true_pos))
-print(true_pos[true_pos["Severity Rating"] > 1])
+
+
+def _get_profane_prob(prob):
+    return prob[1]
+
+
+preds_probs = np.apply_along_axis(
+    _get_profane_prob, 1, model.predict_proba(vectorizer.encode(test_texts)))
+true_pos = df["translated"][preds == 1]
+print(true_pos)
+print(preds_probs[preds == 1])
+
+# %%
+y_pred = model.predict(vectorizer.encode(texts))
+
+# %%
+conf_matrix = confusion_matrix(y, y_pred)
+print(f"f1: {f1_score(y, y_pred)}")
+print(f"acc: {accuracy_score(y, y_pred)}")
