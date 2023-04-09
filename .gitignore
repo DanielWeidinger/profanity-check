@@ -5,6 +5,7 @@ __pycache__/
 
 #Misc.
 *.sync.ipynb
+user_inputs.csv
 
 # C extensions
 *.so

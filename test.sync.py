@@ -7,6 +7,7 @@ import joblib
 import numpy as np
 # %%
 
+
 # Read in data
 data = pd.read_csv('./profanity_check/data/clean_data.csv')
 texts = data['text'].astype(str)
