@@ -65,6 +65,8 @@ print(f"NaN entries: {cd_len-len(clear_data)}")
 train_split = 1
 test_split = 1-train_split
 cd_len = len(clear_data)
-clear_data.iloc[:int(cd_len*train_split)].to_csv("train_data.csv", index=False)
-clear_data.iloc[int(cd_len*test_split):].to_csv("test_data.csv", index=False)
+clear_data\
+    .iloc[:int(cd_len*train_split)].to_csv("data/train_data.csv", index=False)
+clear_data\
+    .iloc[int(cd_len*test_split):].to_csv("data/test_data.csv", index=False)
 clear_data

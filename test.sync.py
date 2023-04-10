@@ -6,7 +6,6 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.svm import LinearSVC
 import joblib
 import numpy as np
-import torch
 # %%
 
 
