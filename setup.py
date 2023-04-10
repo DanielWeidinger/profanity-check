@@ -1,7 +1,20 @@
 import setuptools
+import os
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
+
+
+def package_files(directory):
+    paths = []
+    for (path, _, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('..', path, filename))
+    return paths
+
+
+sentence_transformers_files = package_files(
+    'profanity_protector/data/sentence-transformers_all-MiniLM-L6-v2')
 
 setuptools.setup(
     name="profanity-protector",
@@ -16,7 +29,7 @@ setuptools.setup(
     install_requires=['joblib>=0.14.1', 'scikit-learn>=0.20.2',
                       'sentence_transformers==2.2.2'],
     package_data={'profanity_protector': [
-        'data/model.joblib', 'data/sentence-transformers_all-MiniLM-L6-v2']},
+        'data/model.joblib'] + sentence_transformers_files},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Natural Language :: English",
