@@ -6,6 +6,7 @@ __pycache__/
 #Misc.
 *.sync.ipynb
 user_inputs.csv
+vectorized.npy
 
 # C extensions
 *.so

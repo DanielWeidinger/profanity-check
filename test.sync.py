@@ -7,9 +7,8 @@ from sklearn.svm import LinearSVC
 import joblib
 import numpy as np
 # %%
-
-
 # Read in data
+
 data = pd.read_csv('./train_data.csv')
 texts = data['text'].astype(str)
 y = data['is_offensive']
