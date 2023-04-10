@@ -1,5 +1,6 @@
-from profanity_check import predict, predict_prob
+from profanity_protector import predict, predict_prob
 import pandas as pd
+
 
 # %%
 

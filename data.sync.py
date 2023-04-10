@@ -2,7 +2,7 @@ import re
 import pandas as pd
 
 # %%
-clear_data = pd.read_csv('./profanity_check/data/clean_data.csv')
+clear_data = pd.read_csv('./profanity_protector/data/clean_data.csv')
 len(clear_data)
 offensive = clear_data[clear_data["is_offensive"] == 1]
 normal = clear_data[clear_data["is_offensive"] == 0]
@@ -63,10 +63,10 @@ clear_data = clear_data[clear_data["text"].notna()].sample(
     frac=1).reset_index(drop=True)
 print(f"NaN entries: {cd_len-len(clear_data)}")
 train_split = 1
-test_split = 1-train_split
 cd_len = len(clear_data)
+train_len = int(cd_len*train_split)
 clear_data\
-    .iloc[:int(cd_len*train_split)].to_csv("data/train_data.csv", index=False)
+    .iloc[:train_len].to_csv("data/train_data.csv", index=False)
 clear_data\
-    .iloc[int(cd_len*test_split):].to_csv("data/test_data.csv", index=False)
+    .iloc[train_len:].to_csv("data/test_data.csv", index=False)
 clear_data

@@ -9,7 +9,7 @@ import numpy as np
 # %%
 # Read in data
 
-data = pd.read_csv('./train_data.csv')
+data = pd.read_csv('data/train_data.csv')
 texts = data['text'].astype(str)
 y = data['is_offensive']
 
@@ -36,5 +36,4 @@ cclf.fit(X, y)
 
 # %%
 # Save the model
-joblib.dump(vectorizer, 'vectorizer.joblib')
-joblib.dump(cclf, 'model.joblib')
+joblib.dump(cclf, 'profanity_protector/data/model.joblib')
