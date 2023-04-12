@@ -2,7 +2,7 @@
 
 ## Notice
 
-This is a fork of [vzhou842](https://github.com/vzhou842/profanity-check) excellent work, since the original package did not work on my system.
+This is a fork of [vzhou842](https://github.com/vzhou842/profanity-check) excellent work, which sadly did not work on my system.
 I switched the tokenizer from Bag-of-words to a transformer based embedding(MiniLM-L6-v2) and extended the training data with the following data-sources
 
 - [Kaggle hate speech and offensive language dataset](https://www.kaggle.com/datasets/mrmorj/hate-speech-and-offensive-language-dataset)

@@ -21,7 +21,7 @@ setuptools.setup(
     version="1.0.0",
     author="Daniel Weidinger",
     author_email="daniel.weidinger@codl.at",
-    description="A fast, robust library to check for offensive language in strings.",
+    description="An even more robust fork of 'profanity-check'.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/DanielWeidinger/profanity-protector",
